@@ -1,6 +1,4 @@
-#10497: wait_until_tor_is_working
-#10444: Git tests are fragile
-@product @check_tor_leaks @fragile
+@product @check_tor_leaks
 Feature: Cloning a Git repository
   As a Tails user
   when I clone a Git repository
@@ -9,6 +7,7 @@ Feature: Cloning a Git repository
   Background:
     Given I have started Tails from DVD and logged in and the network is connected
 
+  #10444: Git tests are fragile
   @fragile
   Scenario: Cloning a Git repository anonymously over HTTPS
     When I run "git clone https://git-tails.immerda.ch/myprivatekeyispublic/testing" in GNOME Terminal

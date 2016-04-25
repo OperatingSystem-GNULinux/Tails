@@ -1,5 +1,4 @@
-#10497: wait_until_tor_is_working
-@product @fragile
+@product
 Feature: Chatting anonymously using Pidgin
   As a Tails user
   when I chat using Pidgin
@@ -52,9 +51,7 @@ Feature: Chatting anonymously using Pidgin
     When I say something to my friend
     Then I receive a response from my friend
 
-  # 10376 - "the Tor Browser loads the (startup page|Tails roadmap)" step is fragile
-  # 10443 - OFTC tests are fragile
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: Connecting to the #tails IRC channel with the pre-configured account
     Given I have started Tails from DVD and logged in and the network is connected
     And Pidgin has the expected accounts configured with random nicknames
@@ -92,7 +89,6 @@ Feature: Chatting anonymously using Pidgin
     And I close Pidgin's certificate manager
     Then I cannot add a certificate from the "/live/overlay/home/amnesia/.gnupg" directory to Pidgin
 
-  #10443 - OFTC tests are fragile
   #10720: Tails Installer freezes on Jenkins
   @check_tor_leaks @fragile
   Scenario: Using a persistent Pidgin configuration

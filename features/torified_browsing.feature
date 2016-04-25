@@ -1,6 +1,4 @@
-#10376: The "the Tor Browser loads the (startup page|Tails roadmap)" step is fragile
-#10497: wait_until_tor_is_working
-@product @fragile
+@product
 Feature: Browsing the web using the Tor Browser
   As a Tails user
   when I browse the web using the Tor Browser
@@ -27,7 +25,7 @@ Feature: Browsing the web using the Tor Browser
     Then I can save the current page as "index.html" to the default downloads directory
     And I can print the current page as "output.pdf" to the default downloads directory
 
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: Downloading files with the Tor Browser
     Given I have started Tails from DVD and logged in and the network is connected
     When I start the Tor Browser
@@ -37,7 +35,7 @@ Feature: Browsing the web using the Tor Browser
     When I save the file to the default Tor Browser download directory
     Then the file is saved to the default Tor Browser download directory
 
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: Playing HTML5 audio
     Given I have started Tails from DVD and logged in and the network is connected
     When I start the Tor Browser
@@ -47,7 +45,7 @@ Feature: Browsing the web using the Tor Browser
     And I click the HTML5 play button
     And 1 application is playing audio after 10 seconds
 
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: Watching a WebM video
     Given I have started Tails from DVD and logged in and the network is connected
     When I start the Tor Browser
@@ -109,7 +107,7 @@ Feature: Browsing the web using the Tor Browser
     And the Tor Browser has started
     Then the Tor Browser uses all expected TBB shared libraries
 
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: Opening check.torproject.org in the Tor Browser shows the green onion and the congratulations message
     Given I have started Tails from DVD and logged in and the network is connected
     When I start the Tor Browser
@@ -117,7 +115,7 @@ Feature: Browsing the web using the Tor Browser
     And I open the address "https://check.torproject.org" in the Tor Browser
     Then I see "TorBrowserTorCheck.png" after at most 180 seconds
 
-  @check_tor_leaks @fragile
+  @check_tor_leaks
   Scenario: The Tor Browser's "New identity" feature works as expected
     Given I have started Tails from DVD and logged in and the network is connected
     When I start the Tor Browser
