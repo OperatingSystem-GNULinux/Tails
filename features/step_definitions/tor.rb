@@ -343,7 +343,7 @@ When /^I configure some (\w+) pluggable transports in Tor Launcher$/ do |bridge_
   @screen.wait_and_click('TorLauncherNextButton.png', 10)
   @screen.wait_and_click('TorLauncherBridgeList.png', 10)
   @bridge_hosts = []
-  chutney_src_dir = $config["Chutney"]["src_dir"]
+  chutney_src_dir = "#{GIT_DIR}/submodules/chutney"
   bridge_dirs = Dir.glob(
     "#{$config['TMPDIR']}/chutney-data/nodes/*#{bridge_type}/"
   )
@@ -390,8 +390,8 @@ end
 When /^all Internet traffic has only flowed through the configured pluggable transports$/ do
   assert_not_nil(@bridge_hosts, "No bridges has been configured via the " +
                  "'I configure some ... bridges in Tor Launcher' step")
-  assert_all_connections(@sniffer.pcap_file) do |host|
-    @bridge_hosts.include?({ address: host.address, port: host.port })
+  assert_all_connections(@sniffer.pcap_file) do |c|
+    @bridge_hosts.include?({ address: c.daddr, port: c.dport })
   end
 end
 

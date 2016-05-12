@@ -53,21 +53,19 @@ def pcap_connections_helper(pcap_file, opts = {})
       daddr: ip_packet.ip_daddr,
       sport: sport,
       dport: dport,
-      # Convenience aliases since we most often care about the
-      # destination side of connections (i.e. leaks):
-      address: ip_packet.ip_daddr,
-      port: dport,
     }
   end
   connections.uniq.map { |p| OpenStruct.new(p) }
 end
 
+# These assertions are made from the perspective of the system under
+# testing when it comes to the concepts of "source" and "destination".
 def assert_all_connections(pcap_file, opts = {}, &block)
   all = pcap_connections_helper(pcap_file, opts)
   good = all.find_all(&block)
   bad = all - good
   save_failure_artifact("Network capture", pcap_file) unless bad.empty?
-  assert(bad.empty?, "Unexpected hosts were contacted:\n" +
+  assert(bad.empty?, "Unexpected connections were made:\n" +
                      bad.map { |e| "  #{e}" } .join("\n"))
 end
 
